@@ -1,0 +1,47 @@
+# =========================================================================
+# COMPILAÇÃO E DEPENDÊNCIAS (Maven)
+# =========================================================================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+build.log
+.mvn/timing.properties
+# Se você usa o Maven Wrapper, remova a linha abaixo caso queira versioná-lo
+.mvn/wrapper/maven-wrapper.jar
+
+# =========================================================================
+# IDE - NetBeans
+# =========================================================================
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# =========================================================================
+# CONFIGURAÇÕES ESPECÍFICAS DE AMBIENTE / ARQUIVOS TEMPORÁRIOS
+# =========================================================================
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# =========================================================================
+# COMPATIBILIDADE (Outras IDEs comuns caso o time use)
+# =========================================================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.metadata/
+.classpath
+.project
+.settings/
