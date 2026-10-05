@@ -1,6 +1,7 @@
-package com.pauloandre7.egext.repositories;
+package com.pauloandre7.egext.repositories.text;
 
 import com.pauloandre7.egext.models.VoluntarioRecord;
+import com.pauloandre7.egext.repositories.IVoluntarioRepository;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
