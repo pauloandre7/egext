@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.pauloandre7.egext.repositories;
+package com.pauloandre7.egext.repositories.text;
 
 import com.pauloandre7.egext.models.EventoRecord;
 import com.pauloandre7.egext.models.InscritoRecord;
 import com.pauloandre7.egext.models.StatusEvento;
 import com.pauloandre7.egext.models.VoluntarioRecord;
+import com.pauloandre7.egext.repositories.IEventoRepository;
+import com.pauloandre7.egext.repositories.IInscritoRepository;
+import com.pauloandre7.egext.repositories.IVoluntarioRepository;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
