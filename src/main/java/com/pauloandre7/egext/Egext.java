@@ -7,11 +7,12 @@ import com.pauloandre7.egext.repositories.text.EventoRepositoryText;
 import com.pauloandre7.egext.repositories.IEventoRepository;
 import com.pauloandre7.egext.repositories.IInscritoRepository;
 import com.pauloandre7.egext.repositories.IVoluntarioRepository;
-import com.pauloandre7.egext.repositories.text.InscritoRepositoryText;
-import com.pauloandre7.egext.repositories.text.VoluntarioRepositoryText;
+import com.pauloandre7.egext.repositories.binary.EventoRepositoryBinary;
+import com.pauloandre7.egext.repositories.binary.InscritoRepositoryBinary;
+import com.pauloandre7.egext.repositories.binary.VoluntarioRepositoryBinary;
+import com.pauloandre7.egext.views.InscritosView;
 import com.pauloandre7.egext.views.swingui.EventosView;
-import com.pauloandre7.egext.views.MockInscritoView;
-import com.pauloandre7.egext.views.MockVoluntariosView;
+import com.pauloandre7.egext.views.swingui.VoluntariosView;
 
 public class Egext {
 
@@ -19,25 +20,17 @@ public class Egext {
         try {
             String path = "./";
             
-            IInscritoRepository inscritoRepo = new InscritoRepositoryText(path);
-            IVoluntarioRepository voluntarioRepo = new VoluntarioRepositoryText(path);
-            IEventoRepository eventoRepo = new EventoRepositoryText(path, inscritoRepo, voluntarioRepo);
+            // Inicialização dos repositórios nas interfaces
+            IInscritoRepository inscritoRepo = new InscritoRepositoryBinary(path);
+            IVoluntarioRepository voluntarioRepo = new VoluntarioRepositoryBinary(path);
+            IEventoRepository eventoRepo = new EventoRepositoryBinary(path);
 
-            MockVoluntariosView volView = new MockVoluntariosView();
+            // Injeção das dependências
+            VoluntariosView volView = new VoluntariosView();
             VoluntarioPresenter volPresenter = new VoluntarioPresenter(volView, voluntarioRepo);
 
-            MockInscritoView insView = new MockInscritoView();
+            InscritosView insView = new InscritosView();
             InscritoPresenter insPresenter = new InscritoPresenter(insView, inscritoRepo);
-
-            System.out.println("\n>>> Cadastrando Responsável e Participantes de teste...");
-            volView.setDadosFormulario(0, "RA123456", "Paulo André", "paulo@email.com", "(11) 98765-4321");
-            volPresenter.registrarVoluntario();
-
-            volView.setDadosFormulario(0, "RA654321", "Maria Silva", "maria@email.com", "(11) 91234-5678");
-            volPresenter.registrarVoluntario();
-
-            insView.setDadosFormulario("Carlos Oliveira", "carlos@email.com", "(11) 95555-4444");
-            insPresenter.registrarInscrito();
 
             EventosView telaEventos = new EventosView();
 
@@ -45,7 +38,11 @@ public class Egext {
                 telaEventos, 
                 eventoRepo, 
                 inscritoRepo, 
-                voluntarioRepo
+                voluntarioRepo,
+                volPresenter,
+                volView,
+                insPresenter,
+                insView
             );
 
             telaEventos.setPresenter(eventoPresenter);

@@ -25,6 +25,7 @@ public class VoluntarioPresenter implements IVoluntarioPresenter{
 
     private VoluntarioRecord coletarDadosDaView() throws Exception{
         
+        int id = view.getIdSelecionado();
         String ra = view.getRaInput();
         String nome = view.getNomeInput();
         String email = view.getEmailInput();
@@ -35,7 +36,7 @@ public class VoluntarioPresenter implements IVoluntarioPresenter{
             throw new Exception("Faltam atributos para montar o voluntario");
         }
         
-        return new VoluntarioRecord(0, ra, nome, email, celular);
+        return new VoluntarioRecord(id, ra, nome, email, celular);
     }
     
     @Override
@@ -71,6 +72,12 @@ public class VoluntarioPresenter implements IVoluntarioPresenter{
     public void modificarVoluntario(int id) {
         try{
             VoluntarioRecord voluntario = coletarDadosDaView();
+            
+            if(voluntario.id() == -1){
+                view.exibirMensagemErro("É preciso selecionar um inscrito na tabela!");
+                System.err.print("É preciso selecionar um inscrito na tabela!");
+                return;
+            }
             
             repository.update(voluntario.id(), voluntario);
             view.listarVoluntarios(repository.findAll());

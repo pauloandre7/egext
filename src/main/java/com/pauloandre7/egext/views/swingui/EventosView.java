@@ -2,9 +2,7 @@ package com.pauloandre7.egext.views.swingui;
 
 import com.pauloandre7.egext.models.EventoRecord;
 import com.pauloandre7.egext.models.InscritoRecord;
-import com.pauloandre7.egext.models.StatusEvento;
 import com.pauloandre7.egext.models.VoluntarioRecord;
-import com.pauloandre7.egext.presenters.EventoPresenter;
 import com.pauloandre7.egext.presenters.IEventoPresenter;
 import com.pauloandre7.egext.views.IEventosView;
 
@@ -216,10 +214,18 @@ public class EventosView extends JFrame implements IEventosView {
         add(mainPanel);
     }
 
-    public void setPresenter(EventoPresenter presenter) {
+    @Override
+    public void setPresenter(IEventoPresenter presenter) {
         this.presenter = presenter;
     }
 
+    @Override
+    public int getIdSelecionado(){
+        int id = idSelecionado;
+        idSelecionado = -1;
+        return id;
+    }
+    
     @Override
     public String getTituloInput() {
         return txtTitulo.getText().trim();

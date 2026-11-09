@@ -5,8 +5,7 @@
 package com.pauloandre7.egext.views;
 
 import com.pauloandre7.egext.models.EventoRecord;
-import com.pauloandre7.egext.models.InscritoRecord;
-import com.pauloandre7.egext.models.VoluntarioRecord;
+import com.pauloandre7.egext.presenters.IEventoPresenter;
 import java.util.List;
 
 /**
@@ -19,6 +18,7 @@ import java.util.List;
  */
 public interface IEventosView {
     
+    int getIdSelecionado();
     String getTituloInput();
     String getDataInput();
     String getLocalInput();
@@ -28,7 +28,8 @@ public interface IEventosView {
     String[] getVoluntariosInput();
     String[] getInscritosInput();
     String getStatusInput();
-        
+    
+    void setPresenter(IEventoPresenter presenter);
     void listarEventos(List<EventoRecord> eventos);
     void detalharEvento(EventoRecord evento);
     void exibirMensagem(String msg);

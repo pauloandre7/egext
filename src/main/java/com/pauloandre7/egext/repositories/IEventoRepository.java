@@ -15,7 +15,7 @@ public interface IEventoRepository {
     EventoRecord findById(int id);
     EventoRecord findByTitulo(String nome);
     List<EventoRecord> findAll();
-    void create(EventoRecord voluntario);
+    void create(EventoRecord evento);
     void delete(int id);
-    void update(int id, EventoRecord newVoluntario);
+    void update(int id, EventoRecord newEvento);
 }

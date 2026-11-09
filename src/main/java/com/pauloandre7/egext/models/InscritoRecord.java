@@ -1,5 +1,7 @@
 package com.pauloandre7.egext.models;
 
+import java.io.Serializable;
+
 /**
  * Record representando um Inscrito do evento.
  * Implementa a interface Pessoa, que ajuda na hora de criar métodos genéricos para
@@ -12,5 +14,5 @@ public record InscritoRecord(
     String nome,
     String email,
     String celular
-) implements Pessoa {
+) implements Pessoa, Serializable {
 }

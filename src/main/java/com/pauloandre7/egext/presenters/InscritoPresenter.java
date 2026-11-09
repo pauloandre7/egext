@@ -28,17 +28,23 @@ public class InscritoPresenter implements IInscritoPresenter{
 
     private InscritoRecord coletarDadosDaView() throws Exception{
         InscritoRecord inscrito;
-        
+        int id = view.getIdSelecionado();
         String nome = view.getNomeInput();
         String email = view.getEmailInput();
         String celular = view.getCelularInput();
+        
+        System.out.println("TESTE DE Inscrito");
+        System.out.println(id);
+        System.out.println(nome);
+        System.out.println(email);
+        System.out.println(celular);
         
         boolean algumVazio = nome.isBlank() || email.isBlank() || celular.isBlank();
         if( algumVazio){
             throw new Exception("Faltam atributos para montar o inscrito");
         }
         
-        return new InscritoRecord(0, nome, email, celular);
+        return new InscritoRecord(id, nome, email, celular);
     }
     
     @Override
@@ -72,7 +78,13 @@ public class InscritoPresenter implements IInscritoPresenter{
         try{
             InscritoRecord inscrito = coletarDadosDaView();
             
-            repository.create(inscrito);
+            if(inscrito.id() == -1){
+                view.exibirMensagemErro("É preciso selecionar um inscrito na tabela!");
+                System.err.print("É preciso selecionar um inscrito na tabela!");
+                return;
+            }
+            
+            repository.update(inscrito.id(), inscrito);
             view.listarInscritos(repository.findAll());
             view.exibirMensagem("Voluntário criado com sucesso");
         } catch( Exception e){

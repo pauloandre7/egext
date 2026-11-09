@@ -1,6 +1,7 @@
 package com.pauloandre7.egext.views;
 
 import com.pauloandre7.egext.models.VoluntarioRecord;
+import com.pauloandre7.egext.presenters.IVoluntarioPresenter;
 import java.util.List;
 
 /**
@@ -73,5 +74,25 @@ public class MockVoluntariosView implements IVoluntariosView {
     @Override
     public void exibirMensagemErro(String erro) {
         System.out.println("[VIEW VOLUNTÁRIOS - ERRO]: " + erro);
+    }
+
+    @Override
+    public void setPresenter(IVoluntarioPresenter presenter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setDefaultCloseOperation(int Operation) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getIdSelecionado() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -1,6 +1,7 @@
 package com.pauloandre7.egext.views;
 
 import com.pauloandre7.egext.models.VoluntarioRecord;
+import com.pauloandre7.egext.presenters.IVoluntarioPresenter;
 import java.util.List;
 
 /**
@@ -11,11 +12,15 @@ import java.util.List;
  */
 public interface IVoluntariosView {
     
+    int getIdSelecionado();
     String getNomeInput(); 
     String getEmailInput(); 
     String getCelularInput();
     String getRaInput(); 
     
+    void setPresenter(IVoluntarioPresenter presenter);
+    void setVisible(boolean visible);
+    void setDefaultCloseOperation(int Operation);
     void limparCampos();
     void listarVoluntarios(List<VoluntarioRecord> voluntarios);
     void exibirMensagem(String msg);

@@ -12,10 +12,13 @@ import com.pauloandre7.egext.repositories.IEventoRepository;
 import com.pauloandre7.egext.repositories.IInscritoRepository;
 import com.pauloandre7.egext.repositories.IVoluntarioRepository;
 import com.pauloandre7.egext.views.IEventosView;
+import com.pauloandre7.egext.views.IInscritoView;
+import com.pauloandre7.egext.views.IVoluntariosView;
 import com.pauloandre7.egext.views.InscritosView;
 import com.pauloandre7.egext.views.swingui.VoluntariosView;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -27,24 +30,42 @@ public class EventoPresenter implements IEventoPresenter{
     private final IEventoRepository eventRepo;
     private final IInscritoRepository inscRepo;
     private final IVoluntarioRepository volRepo;
+    private final IVoluntarioPresenter volPresenter;
+    private final IVoluntariosView volView;
+    private final IInscritoPresenter insPresenter;
+    private final IInscritoView insView;
     
     private List<String> inscritosNaoEncontrados;
     private List<String> voluntariosNaoEncontrados;
     
     public EventoPresenter(IEventosView view, IEventoRepository eventRepo,
-            IInscritoRepository inscRepo, IVoluntarioRepository volRepo){
+            IInscritoRepository inscRepo, IVoluntarioRepository volRepo, 
+            IVoluntarioPresenter volPresenter, IVoluntariosView volView, 
+            IInscritoPresenter insPresenter, IInscritoView insView){
         this.view = view;
         this.eventRepo = eventRepo;
         this.inscRepo = inscRepo;
         this.volRepo = volRepo;
+        this.volPresenter = volPresenter;
+        this.volView = volView;
+        this.insPresenter = insPresenter;
+        this.insView = insView;
     }
     
     private EventoRecord coletarDadosDaView() throws Exception{
-               
+              
+        int id = view.getIdSelecionado();
         String titulo = view.getTituloInput();
         String data = view.getDataInput();
         String local = view.getLocalInput();
-        StatusEvento status = StatusEvento.valueOf(view.getStatusInput());
+        
+        String statusBruto = view.getStatusInput();
+
+        // Se a string vier com o pacote da classe (tiver pontos), corta e pega só o final
+        if (statusBruto != null && statusBruto.contains(".")) {
+            statusBruto = statusBruto.substring(statusBruto.lastIndexOf('.') + 1);
+        }
+        StatusEvento status = StatusEvento.valueOf(statusBruto);
         
         // pesquisa o Voluntario Responsável no repo
         String responsavelNome = view.getResponsavelInput();
@@ -63,7 +84,7 @@ public class EventoPresenter implements IEventoPresenter{
                     try{
                         // Uso try catch para permitir que o fluxo continue caso haja um nome errado.
                         voluntarios.add(volRepo.findByNome(nome.trim()));
-                    } catch(IllegalArgumentException e){
+                    } catch(NoSuchElementException e){
                         voluntariosNaoEncontrados.add(nome.trim());
                     }
                     
@@ -83,7 +104,7 @@ public class EventoPresenter implements IEventoPresenter{
                 if(!nome.trim().isBlank()){
                     try{
                         inscritos.add(inscRepo.findByNome(nome.trim()));
-                    }catch(IllegalArgumentException e){
+                    }catch(NoSuchElementException e){
                         inscritosNaoEncontrados.add(nome.trim());
                     }
                 }
@@ -94,7 +115,7 @@ public class EventoPresenter implements IEventoPresenter{
             throw new Exception("Faltam atributos para montar o inscrito");
         }
         
-        return new EventoRecord(0, titulo, data, local, responsavel, 
+        return new EventoRecord(id, titulo, data, local, responsavel, 
                 voluntarios, inscritos, status);
     }
 
@@ -146,7 +167,13 @@ public class EventoPresenter implements IEventoPresenter{
         try{
             EventoRecord evento = coletarDadosDaView();
             
-            eventRepo.update(id, evento);
+            if(evento.idEv() == -1){
+                view.exibirMensagemErro("É preciso selecionar um inscrito na tabela!");
+                System.err.print("É preciso selecionar um inscrito na tabela!");
+                return;
+            }
+            
+            eventRepo.update(evento.idEv(), evento);
             view.listarEventos(eventRepo.findAll());
             
             StringBuilder avisos = new StringBuilder(); 
@@ -175,10 +202,6 @@ public class EventoPresenter implements IEventoPresenter{
     }
     
     public void abrirTelaVoluntarios() { 
-        VoluntariosView volView = new VoluntariosView(); 
-        
-        VoluntarioPresenter volPresenter = new VoluntarioPresenter(volView, this.volRepo);
-        
         volView.setPresenter(volPresenter);        
         volView.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         volView.setVisible(true);
@@ -186,10 +209,6 @@ public class EventoPresenter implements IEventoPresenter{
     }
     
     public void abrirTelaInscritos() { 
-        InscritosView insView = new InscritosView(); 
-
-        InscritoPresenter insPresenter = new InscritoPresenter(insView, this.inscRepo); 
-
         insView.setPresenter(insPresenter); 
         insView.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE); 
         insView.setVisible(true); 

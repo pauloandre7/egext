@@ -3,6 +3,7 @@ package com.pauloandre7.egext.views;
 import com.pauloandre7.egext.models.EventoRecord;
 import com.pauloandre7.egext.models.InscritoRecord;
 import com.pauloandre7.egext.models.VoluntarioRecord;
+import com.pauloandre7.egext.presenters.IEventoPresenter;
 import java.util.List;
 
 /**
@@ -132,5 +133,15 @@ public class MockEventosView implements IEventosView {
     @Override
     public void exibirMensagemErro(String erro) {
         System.out.println("[VIEW EVENTOS - ERRO]: " + erro);
+    }
+
+    @Override
+    public void setPresenter(IEventoPresenter presenter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getIdSelecionado() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

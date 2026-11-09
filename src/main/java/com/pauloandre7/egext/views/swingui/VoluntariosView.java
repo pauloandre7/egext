@@ -16,7 +16,7 @@ import java.util.List;
 public class VoluntariosView extends JFrame implements IVoluntariosView {
 
     private IVoluntarioPresenter presenter;
-    private Integer idSelecionado = null;
+    private Integer idSelecionado = -1;
 
     private JTextField txtRa;
     private JTextField txtNome;
@@ -155,10 +155,18 @@ public class VoluntariosView extends JFrame implements IVoluntariosView {
         add(mainPanel);
     }
 
+    @Override
     public void setPresenter(IVoluntarioPresenter presenter) {
         this.presenter = presenter;
     }
 
+    @Override
+    public int getIdSelecionado(){
+        int id = idSelecionado;
+        idSelecionado = -1;
+        return id;
+    }
+    
     @Override
     public String getNomeInput() {
         return txtNome.getText().trim();

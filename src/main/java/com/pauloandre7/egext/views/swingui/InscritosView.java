@@ -146,10 +146,19 @@ public class InscritosView extends JFrame implements IInscritoView {
         add(mainPanel);
     }
 
+    @Override
     public void setPresenter(IInscritoPresenter presenter) {
         this.presenter = presenter;
     }
 
+    @Override
+    public int getIdSelecionado(){
+        int id = idSelecionado;
+        idSelecionado = -1;
+        return id;
+        
+    }
+    
     @Override
     public String getNomeInput() {
         return txtNome.getText().trim();

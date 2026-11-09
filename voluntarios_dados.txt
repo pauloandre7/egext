@@ -1,0 +1,2 @@
+1;Paulo André;paulo@email.com;(11) 98765-4321;RA123456
+2;Maria Silva;maria@email.com;(11) 91234-5678;RA654321

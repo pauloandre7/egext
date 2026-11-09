@@ -11,7 +11,7 @@ public interface IInscritoRepository {
     InscritoRecord findById(int id);
     InscritoRecord findByNome(String nome);
     List<InscritoRecord> findAll();
-    void create(InscritoRecord voluntario);
+    void create(InscritoRecord inscrito);
     void delete(int id);
-    void update(int id, InscritoRecord newVoluntario);
+    void update(int id, InscritoRecord newInscrito);
 }

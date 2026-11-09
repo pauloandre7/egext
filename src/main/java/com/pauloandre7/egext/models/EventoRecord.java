@@ -1,5 +1,6 @@
 package com.pauloandre7.egext.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public record EventoRecord(
     List<VoluntarioRecord> voluntariosInternos,
     List<InscritoRecord> inscritos,
     StatusEvento statusEvento
-) {
+) implements Serializable {
 }
 // Professor, optei por records para diminuir a verbosidade do Java, sem a 
 // necessidade dependências externas, como Lombok.

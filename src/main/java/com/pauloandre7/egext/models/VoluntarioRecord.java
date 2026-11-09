@@ -1,5 +1,7 @@
 package com.pauloandre7.egext.models;
 
+import java.io.Serializable;
+
 /**
  * Record representando um Voluntario no Egext.
  * 
@@ -11,5 +13,5 @@ public record VoluntarioRecord(
     String nome,
     String email,
     String celular
-) implements Pessoa {
+) implements Pessoa, Serializable {
 }

@@ -7,7 +7,7 @@ package com.pauloandre7.egext.models;
  */
 public enum StatusEvento {
     PLANEJAMENTO,
-    EXECUCAO,
-    RELATORIO,
-    FINALIZADO
+    EM_ANDAMENTO,
+    CONCLUIDO,
+    CANCELADO
 }

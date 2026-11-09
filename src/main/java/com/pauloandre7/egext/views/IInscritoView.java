@@ -5,6 +5,7 @@
 package com.pauloandre7.egext.views;
 
 import com.pauloandre7.egext.models.InscritoRecord;
+import com.pauloandre7.egext.presenters.IInscritoPresenter;
 import java.util.List;
 
 /**
@@ -15,10 +16,14 @@ import java.util.List;
  */
 public interface IInscritoView {
     
+    int getIdSelecionado();
     String getNomeInput(); 
     String getEmailInput(); 
     String getCelularInput();
     
+    void setPresenter(IInscritoPresenter presenter);
+    void setVisible(boolean visible);
+    void setDefaultCloseOperation(int operation);
     void limparCampos();
     void listarInscritos(List<InscritoRecord> voluntarios);
     void exibirMensagem(String msg);

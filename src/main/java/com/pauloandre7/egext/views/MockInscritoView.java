@@ -1,6 +1,7 @@
 package com.pauloandre7.egext.views;
 
 import com.pauloandre7.egext.models.InscritoRecord;
+import com.pauloandre7.egext.presenters.IInscritoPresenter;
 import java.util.List;
 
 /**
@@ -65,5 +66,25 @@ public class MockInscritoView implements IInscritoView {
     @Override
     public void exibirMensagemErro(String erro) {
         System.out.println("[VIEW INSCRITOS - ERRO]: " + erro);
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setDefaultCloseOperation(int operation) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setPresenter(IInscritoPresenter presenter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getIdSelecionado() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
